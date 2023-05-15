@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Items
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-input placeholder="Item name" [(ngModel)]="newItemName"></ion-input>
+    <ion-button slot="end" (click)="addItem()">Add Item</ion-button>
+  </ion-item>
+
+  <ion-list>
+    <ion-item *ngFor="let item of items" (click)="navigateToItemDetail(item)">
+      <ion-input [(ngModel)]="item.name" [readonly]="!item.isEditing"></ion-input>
+      <ion-buttons slot="end">
+        <ion-button *ngIf="!item.isEditing" (click)="editItem(item)">Edit</ion-button>
+        <ion-button *ngIf="item.isEditing" (click)="saveItem(item)">Save</ion-button>
+      </ion-buttons>
+      <ion-icon name="trash" slot="end" (click)="removeItem(item)"></ion-icon>
+    </ion-item>
+  </ion-list>
+</ion-content>
